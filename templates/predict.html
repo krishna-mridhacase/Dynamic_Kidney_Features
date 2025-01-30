@@ -1,0 +1,198 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+body {
+    font-family: Cambria;
+    height: 100%;
+    background-image: linear-gradient(#4e0374, #c37ee6);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Courier New', Courier, monospace;
+}
+#shap-plot, #force-plot {
+    max-width: 100%;
+    height: auto;
+}
+
+#lime-plot {
+    max-width: 100%;
+    height: auto;
+}
+
+.table-custom {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+.table-custom th, .table-custom td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+.table-custom th {
+    background-color: #4e0374;
+    color: white;
+    text-align: center;
+}
+.table-custom td {
+    text-align: center;
+}
+.prediction-tree {
+    background-color: #f0f8ff;
+    /* padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd; */
+    width: 100%;
+    height: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.prediction-tree ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.prediction-tree li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.prediction-tree li::before {
+    content: "├── ";
+    color: #555;
+}
+
+.prediction-tree li:last-child::before {
+    content: "└── ";
+}
+
+
+</style>
+<div class="row" style="margin-bottom: 477px;">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+
+        <!-- User Input Table -->
+        <div class="card card-body alert alert-info">
+            <h4>User Input Information</h4>
+            <table class="table-custom">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for feature, value in user_input.items() %}
+                        <tr>
+                            <td>{{ feature | capitalize }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="prediction-tree">
+            <center>
+            <h3>Model Predictions From Different Models and Final model Select on votting</h3>
+            </center>
+            <ul>
+                <li><strong>Ada Boost:</strong> {{ 'CKD' if model_predictions['Ada Boost'] == 0 else 'Healthy' }}</li>
+                <li><strong>Cat Boost:</strong> {{ 'CKD' if model_predictions['Cat Boost'] == 0 else 'Healthy' }}</li>
+                <li><strong>K-Nearest Neighbors:</strong> {{ 'CKD' if model_predictions['K-Nearest Neighbors'] == 0 else 'Healthy' }}</li>
+                <li><strong>Random Forest:</strong> {{ 'CKD' if model_predictions['Random Forest'] == 0 else 'Healthy' }}</li>
+                <li><strong>XGBoost:</strong> {{ 'CKD' if model_predictions['XGBoost'] == 0 else 'Healthy' }}</li>
+                <li><strong>Extra Trees:</strong> {{ 'CKD' if model_predictions['Extra Trees'] == 0 else 'Healthy' }}</li>
+            </ul>
+            <center>
+            <h3>Final Prediction (Majority Vote)</h3>
+            <p><strong>{{ 'CKD' if final_prediction == 0 else 'Healthy' }}</strong></p>
+            </center>
+        </div>
+        
+        
+        <div class="card card-body alert alert-primary">
+            <center>
+                <!-- Display general prediction result and missing features first -->
+
+           
+                {% if pred is not none %}
+                    <h2 style="font-size: 20px; font-weight: bold;">The predicted class for the new patient is: {{ predicted_label }}</h2>
+                    <p style="font-size: 20px; font-weight: bold;">Probability of being Non-CKD (Healthy): {{ non_ckd_class_probability }}</p>
+                    <p style="font-size: 20px; font-weight: bold;">Probability of being CKD: {{ ckd_class_probability }}</p>
+                
+                    {% if missing_features %}
+                        <div style="color: red;">
+                            <h3 style="font-size: 26px; font-weight: bold;">⚠️ Warning: The following important features are missing:</h3>
+                            <ul style="font-size: 18px;">
+                                {% for feature in missing_features %}
+                                    <li style="font-weight: bold;">{{ feature | capitalize }}</li>
+                                {% endfor %}
+                            </ul>
+                            <p style="font-size: 26px; font-weight: bold;"> Note: Even though we provide you with prediction results, please note that having these tests is crucial for accurate diagnosis.</p>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </center>
+        </div>
+        
+
+        {% if pred == 0 %}
+            <div class="card card-body alert alert-danger">
+                <center>
+                    <h3>POSITIVE. The patient might have Chronic Kidney Disease (CKD).</h3>
+                    <p>It is recommended to consult with a healthcare provider for further diagnosis and management.</p>
+                    <h4>Suggestions:</h4>
+                    <ul>
+                        <li>Consult a nephrologist for a comprehensive evaluation.</li>
+                        <li>Undergo further diagnostic tests such as blood tests, urine tests, and imaging studies.</li>
+                        <li>Follow a kidney-friendly diet low in sodium, potassium, and phosphorus.</li>
+                        <li>Monitor and control blood pressure and blood sugar levels.</li>
+                        <li>Stay hydrated but limit fluid intake if advised by your doctor.</li>
+                        <li>Avoid nonsteroidal anti-inflammatory drugs (NSAIDs) and other medications that can harm the kidneys.</li>
+                        <li>Consider lifestyle changes such as regular exercise, quitting smoking, and maintaining a healthy weight.</li>
+                    </ul>
+                    <p>For more information about CKD and its management, please visit <a href="https://www.kidney.org/atoz/content/about-chronic-kidney-disease" target="_blank">National Kidney Foundation</a>.</p>
+                    <h4>Top 5 Feature Impact (SHAP values):</h4>
+                    <ul>
+                        {% for feature, impact in shap_impact.items() %}
+                            <li>{{ feature | capitalize }}: {{ impact }}</li>
+                        {% endfor %}
+                    </ul>
+                    <img id="shap-plot" src="{{ url_for('static', filename='shap_plot.png') }}" alt="Top 5 SHAP Values Bar Plot">
+                    <h4>Force Plot:</h4>
+                    <img id="force-plot" src="{{ url_for('static', filename='force_plot.png') }}" alt="SHAP Force Plot">
+
+                    <h1>LIME Explanation</h1>
+                    <iframe src="{{ url_for('static', filename='lime_explanation.html') }}" width="100%" height="600px"></iframe>
+                </center>
+            </div>
+        {% else %}
+            <div class="card card-body alert alert-success">
+                <center>
+                    <h3>NEGATIVE. The patient is healthy.</h3>
+                    <p>No immediate action is required. Continue to maintain a healthy lifestyle to prevent potential kidney issues.</p>
+                    <h4>Top 5 Feature Impact (SHAP values):</h4>
+                    <ul>
+                        {% for feature, impact in shap_impact.items() %}
+                            <li>{{ feature | capitalize }}: {{ impact }}</li>
+                        {% endfor %}
+                    </ul>
+                    <img id="shap-plot" src="{{ url_for('static', filename='shap_plot.png') }}" alt="Top 5 SHAP Values Bar Plot">
+                    <h4>Force Plot:</h4>
+                    <img id="force-plot" src="{{ url_for('static', filename='force_plot.png') }}" alt="SHAP Force Plot">
+                    <h1>LIME Explanation</h1>
+                    <iframe src="{{ url_for('static', filename='lime_explanation.html') }}" width="100%" height="600px"></iframe>
+                </center>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-4"><a href="{{ url_for('home') }}" class="btn btn-block btn-primary" style="background-color: #4e0374">Back to Home</a></div>
+            <div class="col-md-4"><button onclick="window.print();" class="btn btn-block btn-secondary">Print Page</button></div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}

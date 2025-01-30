@@ -1,0 +1,52 @@
+{% extends 'main.html' %}
+{% block content %}
+{% if message %}
+    <div class="alert alert-danger">{{ message }}</div>
+{% endif %}
+<style>
+body {
+    font-family: 'Courier New', Courier, monospace;
+    height: 100%;
+    background-image: linear-gradient(#037472, #120bd0);
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+h1 {
+  text-align: center;
+}
+</style>
+<div class="container">
+    <div class="card card-body" style="border: 1px solid black; box-shadow: 0 0 10px black; background-color: #dbcb20">
+        <h1>Building Trust in Clinical AI: A Web-Based Explainable Decision Support System for Chronic Kidney Disease</h1>
+        <center><h3>Krishna Mridha, Ming Wang, Lijun Zhang</h3></center> 
+        <br>
+       <h2>Model Accuracies:</h2>
+        <ul>
+            <li>Ada Boost: <strong>100%</strong></li>
+            <li>Cat Boost: <strong>98.33%</strong></li>
+            <li>K-nearest Neighbors: <strong>65.83%</strong></li>
+            <li>Random Forest: <strong>95.83%</strong></li>
+            <li>Xgb Boost: <strong>96.67%</strong></li>
+            <li>Extra Tree: <strong>96.67%</strong></li>
+        </ul>
+        <br>
+        <h3>Information about the Diseases:</h3>
+        <br>
+        <div class="row">
+            <div class="col-md-12 card card-body" style="box-shadow: 0 0 5px black; margin: 5px; background-color: #dbcb20">
+                <h4>Chronic Kidney Disease</h4>
+                <p>Chronic kidney disease (CKD) means your kidneys are damaged and can’t filter blood the way they should. The disease is called “chronic” because the damage to your kidneys happens slowly over a long period of time. This damage can cause wastes to build up in your body. CKD can also cause other health problems.</p>
+                <h5>Symptoms</h5>
+                <ul>
+                    <li>Nausea</li>
+                    <li>Vomiting</li>
+                    <li>Fatigue and weakness</li>
+                    <li>Muscle twitches and cramps</li>
+                    <li>Loss of appetite</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
