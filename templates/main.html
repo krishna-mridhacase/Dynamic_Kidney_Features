@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="og:title" content="Medibuddy: Smart Disease Predictor">
-  <meta name="author" content="KANCHI TANK">
-  <meta name="og:image" content="static/favicon.ico">
-  <title>CINEMA Research Group at Case Western Reserve University</title>
-  <link rel="icon" type="image/x-icon" href="static/favicon.ico?v=2" />
-  
+  <meta name="og:image" content="static/kidney.png">
+  <title>Krishna Mridha, Ming Wang, Lijun Zhang</title>
+  <link rel="icon" type="image/x-icon" href="static/kidney.png?v=2" />
+
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-  
+
   <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKpYfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <!-- Popper.js -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <!-- Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
   <style>
     html, body {
       height: 100%;
@@ -44,24 +44,42 @@
   </style>
 </head>
 <body>
+
+  <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="background-image: linear-gradient(#4e0374, #4e0374) !important;">
-    <a class="navbar-brand" href="{{ url_for('home') }}">
-      <img src="{{ url_for('static', filename='my_logo.png') }}" height="70px" width="180px" alt="Medibuddy Logo">
-    </a>
+
+    
+    <!-- Toggler Button for Mobile -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Navbar Items -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <li class="nav-item active">
           <a class="nav-link" href="{{ url_for('home') }}">Home</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="{{ url_for('kidneyPage') }}">Kidney</a>
+          <a class="nav-link" href="{{ url_for('kidneyPage') }}">CKD Model</a>
+        </li>
+
+        <!-- Dropdown Menu Example -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Diabetes</a>
+            <a class="dropdown-item" href="#">Heart Disease</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Contact Us</a>
+          </div>
         </li>
       </ul>
     </div>
   </nav>
+
   <br><br><br><br>
   <main>
     <div class="container-fluid" style="margin-bottom: 20px;">
@@ -69,6 +87,8 @@
       {% endblock %}
     </div>
   </main>
+
+  <!-- Footer -->
   <footer style="background-image: linear-gradient(#a40c68, #4e0374) !important;">
     <center>
       <ul style="list-style-type:none;">
@@ -76,5 +96,6 @@
       </ul>
     </center>
   </footer>
+
 </body>
 </html>

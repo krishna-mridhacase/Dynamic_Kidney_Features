@@ -18,35 +18,161 @@ h1 {
 </style>
 <div class="container">
     <div class="card card-body" style="border: 1px solid black; box-shadow: 0 0 10px black; background-color: #dbcb20">
-        <h1>Building Trust in Clinical AI: A Web-Based Explainable Decision Support System for Chronic Kidney Disease</h1>
-        <center><h3>Krishna Mridha, Ming Wang, Lijun Zhang</h3></center> 
-        <br>
-       <h2>Model Accuracies:</h2>
-        <ul>
-            <li>Ada Boost: <strong>100%</strong></li>
-            <li>Cat Boost: <strong>98.33%</strong></li>
-            <li>K-nearest Neighbors: <strong>65.83%</strong></li>
-            <li>Random Forest: <strong>95.83%</strong></li>
-            <li>Xgb Boost: <strong>96.67%</strong></li>
-            <li>Extra Tree: <strong>96.67%</strong></li>
-        </ul>
-        <br>
-        <h3>Information about the Diseases:</h3>
+        <h1>Beyond Missing Data: Enhancing CKD Prediction with Explainable AI and Dynamic Feature Imputation</h1>
+        <center>
+            <h3>Krishna Mridha, Ming Wang, Lijun Zhang</h3>
+            <img src="static/022.jpg" alt="Krishna Mridha" width="100">
+            <img src="static/ming_wang.png" alt="Ming Wang" width="100">
+            <img src="static/lijun_zhang.png" alt="Lijun Zhang" width="100">
+        </center>
+        
         <br>
         <div class="row">
-            <div class="col-md-12 card card-body" style="box-shadow: 0 0 5px black; margin: 5px; background-color: #dbcb20">
-                <h4>Chronic Kidney Disease</h4>
-                <p>Chronic kidney disease (CKD) means your kidneys are damaged and can’t filter blood the way they should. The disease is called “chronic” because the damage to your kidneys happens slowly over a long period of time. This damage can cause wastes to build up in your body. CKD can also cause other health problems.</p>
-                <h5>Symptoms</h5>
-                <ul>
-                    <li>Nausea</li>
-                    <li>Vomiting</li>
-                    <li>Fatigue and weakness</li>
-                    <li>Muscle twitches and cramps</li>
-                    <li>Loss of appetite</li>
-                </ul>
+            <div class="col-md-12 card card-body d-flex align-items-center justify-content-between" 
+                 style="box-shadow: 0 0 5px black; margin: 5px; background-color: #f4f4f4;">
+                
+                <!-- Model Accuracies List (65%) -->
+                <div style="width: 65%;">
+                    <h4>Model Accuracies</h4>
+                    <ul>
+                        <li>✅ <b>Ada Boost:</b> <strong>100%</strong></li>
+                        <li>✅ <b>Cat Boost:</b> <strong>98.33%</strong></li>
+                        <li>✅ <b>K-Nearest Neighbors:</b> <strong>65.83%</strong></li>
+                        <li>✅ <b>Random Forest:</b> <strong>95.83%</strong></li>
+                        <li>✅ <b>XGB Boost:</b> <strong>96.67%</strong></li>
+                        <li>✅ <b>Extra Tree:</b> <strong>96.67%</strong></li>
+                    </ul>
+                </div>
+        
+                <!-- Model Accuracy Image (30%) -->
+                <div style="width: 30%;">
+                    <img src="{{ url_for('static', filename='model.jpg') }}" 
+                         alt="Model Accuracy Chart" style="width:100%; border-radius: 10px;">
+                    <center>
+                        <p><small>Model Architecture of our work </small></p>
+                         <p><small>Source: <a href="https://archive.ics.uci.edu/dataset/336/chronic+kidney+disease" 
+                                             target="_blank">UCI Data Reposity</a></small></p>
+                    </center>
+                </div>
             </div>
         </div>
+        
+
+        <!-- CKD Overview -->
+        <div class="row">
+            <div class="col-md-12 card card-body d-flex align-items-center justify-content-between" 
+                style="box-shadow: 0 0 5px black; margin: 5px; background-color: #fafaf5;">
+                <div style="width: 65%;">
+                    <h4>What is Chronic Kidney Disease?</h4>
+                    <p><b>Chronic kidney disease (CKD)</b> means your kidneys are damaged and can’t filter blood the way they should. 
+                    The disease is called “chronic” because it develops <b>slowly over time</b>.
+                    CKD causes waste to build up in your body, leading to serious health problems. 
+                    Early detection is key to slowing its progression!</p>
+                </div>
+                <div style="width: 50%;">
+                    <img src="{{ url_for('static', filename='stages.png') }}" 
+                        alt="CKD Stages" style="width:100%; border-radius: 10px;">
+                    <center><p><small>Source: <a href="https://www.ukkidney.org/health-professionals/information-resources/uk-eckd-guide/ckd-staging" 
+                                        target="_blank">UK Kidney Association</a></small></p></center>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Symptoms Section -->
+        <div class="row">
+            <div class="col-md-12 card card-body d-flex align-items-center justify-content-between" 
+                style="box-shadow: 0 0 5px black; margin: 5px; background-color: #f4f4f4;">
+                <div style="width: 65%;">
+                    <h4>Symptoms of CKD</h4>
+                    <ul>
+                        <li>✅ Nausea & Vomiting</li>
+                        <li>✅ Fatigue and Weakness</li>
+                        <li>✅ Muscle Twitches & Cramps</li>
+                        <li>✅ Loss of Appetite</li>
+                        <li>✅ Swelling in Legs & Feet</li>
+                        <li>✅ Frequent Urination, Especially at Night</li>
+                        <li>✅ Shortness of Breath</li>
+                        <li>✅ Dry & Itchy Skin</li>
+                    </ul>
+                </div>
+                <div style="width: 30%;">
+                    <img src="{{ url_for('static', filename='symtoms.jpg') }}" 
+                        alt="Kidney Disease Symptoms" style="width:100%; border-radius: 10px;">
+                   <center> <p><small>Source: <a href="https://my.clevelandclinic.org/health/diseases/15096-chronic-kidney-disease" 
+                                        target="_blank">Cleveland Clinic</a></small></p> </center>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Causes and Risk Factors -->
+        <div class="row">
+            <div class="col-md-12 card card-body d-flex align-items-center justify-content-between" 
+                style="box-shadow: 0 0 5px black; margin: 5px; background-color: #e0f7fa;">
+                <div style="width: 65%;">
+                    <h4>Causes & Risk Factors</h4>
+                    <ul>
+                        <li>💊 High Blood Pressure - One of the leading causes</li>
+                        <li>🩸 Diabetes - High blood sugar can damage kidneys</li>
+                        <li>🍔 Obesity & Poor Diet - Unhealthy lifestyle choices</li>
+                        <li>🚬 Smoking & Alcohol - Damages blood vessels</li>
+                        <li>👵 Age & Family History - Higher risk if relatives had CKD</li>
+                    </ul>
+                </div>
+                <div style="width: 30%;">
+                    <p><small>Source: <a href="https://www.kidney.org/kidney-topics/chronic-kidney-disease-ckd" 
+                                        target="_blank">National Kideny Foundation</a></small></p>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <!-- Prevention Tips -->
+        <div class="row">
+            <div class="col-md-12 card card-body d-flex align-items-center justify-content-between" 
+                style="box-shadow: 0 0 5px black; margin: 5px; background-color: #d4edda;">
+                <div style="width: 65%;">
+                    <h4>Prevention & Healthy Lifestyle</h4>
+                    <ul>
+                        <li>🥦 Eat a Healthy Diet (Low sodium & protein balance)</li>
+                        <li>🚶‍♂️ Exercise Regularly</li>
+                        <li>💧 Stay Hydrated - Drink enough water daily</li>
+                        <li>⚖️ Maintain a Healthy Weight</li>
+                        <li>❌ Avoid Smoking & Alcohol</li>
+                        <li>🩺 Monitor Blood Pressure & Diabetes</li>
+                    </ul>
+                </div>
+                <div style="width: 30%;">
+                    <p><small>Source: <a href="https://www.kidney.org/prevention" 
+                                        target="_blank">National Kidney Foundation</a></small></p>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+      <!-- Call to Action Inside Card -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-body text-center" style="box-shadow: 0 0 5px black; margin: 10px; background-color: #e3f2fd;">
+                    <h4>Do you want to test the model?</h4>
+                    <a class="btn btn-primary" href="{{ url_for('kidneyPage') }}" 
+                    style="font-size: 18px; padding: 10px 20px; border-radius: 8px;">CKD Prediction</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <h4>Author's Website and Google Scholar:</h4>
+        <ul>
+            <li><a href="https://scholar.google.com/citations?user=_Yulp8gAAAAJ&hl=en">Google Scholar</a></li>
+            <li><a href="https://cwru-cinema.com/">Author's Website</a></li>
+        </ul>
     </div>
 </div>
 {% endblock %}
